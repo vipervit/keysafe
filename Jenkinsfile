@@ -6,7 +6,7 @@ pipeline {
 
       stage('INSTALL DEPENDENCIES') {
        steps {
-       sh 'pip install --upgrade psutil'
+       sh 'pip install --upgrade jsondata'
        }
      }
 
@@ -25,24 +25,24 @@ pipeline {
 
       stage('UPLOAD') {
         steps {
-          sh 'python3 -m twine upload dist/* -u vipervit'
+          sh 'python3 -m twine upload dist/* -u keysafe'
         }
        }
 
       stage('DEPLOY') {
         steps {
-          sh 'pip install --upgrade viperlib'
+          sh 'pip install --upgrade keysafe'
         }
        }
 
       }
 
-      stage('DOCKER: Push image') {
+/*      stage('DOCKER: Push image') {
         steps('push image') {
-          sh 'docker push vipervit/viperlib:latest'
+          sh 'docker push vipervit/keysafe:latest'
         }
       }
-
+*/
 
     }
 }

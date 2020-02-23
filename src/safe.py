@@ -6,7 +6,7 @@ from viperlib import jsondata
 
 logger = logging.getLogger(__name__)
 
-class creds():
+class safe():
 
     _srctype = None
     _service = None
@@ -103,8 +103,9 @@ class creds():
 
     def __get_secure__(self):
         actual = keyring.get_password(self.service, self.alias)
-        self.user = (actual.split(self._sepid)[1]).split(self._seppwd)[0]
-        self.password = actual.split(self._seppwd)[1]
+        if actual is not None:
+            self.user = (actual.split(self._sepid)[1]).split(self._seppwd)[0]
+            self.password = actual.split(self._seppwd)[1]
 
     def __set_plain__(self):
         raise NotImplementedError
