@@ -17,7 +17,7 @@ In other words, keys themselves are hidden in a safe.
 
 \>>>x.alias='John'
 
-\>>>x.user='john@mail.com'
+\>>>x.user=`'john@mail.com'`
 
 \>>>x.password='$WhoopsyDaisies01'
 
