@@ -5,9 +5,9 @@ Many websites require user's email address as a user login id. You may want to a
 
 In other words, keys themselves are hidden in a safe.  
 
-### Examples of use:###
+### Examples of use: ###
 
-*Create a record*
+#### *Create a record* ####
 
 from keysafe import safe
 
@@ -24,21 +24,21 @@ x.password='$WhoopsyDaisies01'
 x.set()
 
 
-*Retreive user id and passwrod*
+#### *Retreive user id and passwrod* ####
 
->>> y=safe()
+\>>> y=safe()
 
->>> y.service='MYSAFE'
+\>>> y.service='MYSAFE'
 
->>> y.alias='John'
+\>>> y.alias='John'
 
->>> y.get()
+\>>> y.get()
 
->>> y.user
+\>>> y.user
 
 'john@mail.com'
 
->>> y.password
+\>>> y.password
 
 '$WhoopsyDaisies01' 
 
