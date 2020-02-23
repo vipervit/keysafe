@@ -9,19 +9,19 @@ In other words, keys themselves are hidden in a safe.
 
 #### *Create a record* ####
 
-from keysafe import safe
+>>>from keysafe import safe
 
-x=safe()
+>>>x=safe()
 
-x.service='MYSAFE'
+>>>x.service='MYSAFE'
 
-x.alias='John'
+>>>x.alias='John'
 
-x.user='john@mail.com'
+>>>x.user='john@mail.com'
 
-x.password='$WhoopsyDaisies01'
+>>>x.password='$WhoopsyDaisies01'
 
-x.set()
+>>>x.set()
 
 
 #### *Retreive user id and passwrod* ####
@@ -36,7 +36,7 @@ x.set()
 
 \>>> y.user
 
-'john@mail.com'
+`'john@mail.com'`
 
 \>>> y.password
 
