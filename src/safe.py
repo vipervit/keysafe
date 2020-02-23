@@ -97,7 +97,7 @@ class safe():
 
     def __get_plain__(self):
         self.plain.get_from_file()
-        t = plain.contents[self.alias]
+        t = self.plain.contents[self.alias]
         self.user = t[self.KWD_UID]
         self.password = t[self.KWD_PWD]
 

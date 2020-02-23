@@ -1,2 +1,2 @@
 # keysafe
- Keyring-based utilitiy for safekeeping of login informaiton. 
+ Keyring-based utilitiy for enhcaned safekeeping of login informaiton. 

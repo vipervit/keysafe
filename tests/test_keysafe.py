@@ -1,29 +1,23 @@
 import pytest
 
 import keysafe
-from keysafe.tests import dir_data
+from keysafe.tests import *
 from keysafe.src.safe import safe
-
-test_service = 'KEYSAFE_TEST'
-test_alias = 'keysafe_username'
-test_user = 'keysafe_userid'
-test_password = 'keysafe_password'
-
 
 def init_secure():
 
     x = safe(safe.CREDS_TYPE_SECURE)
-    x.service = test_service
-    x.alias = test_alias
-    x.user = test_user
-    x.password = test_password
+    x.service = service
+    x.alias = alias
+    x.user = user
+    x.password = password
     return x
 
 def init_unsecure():
 
     y = safe(safe.CREDS_TYPE_PLAIN)
-    y.alias = test_alias
-    y.user = test_user
+    y.alias =  alias
+    y.plain.location = dir_data
     return y
 
 def test_create_and_verify_secure():
@@ -32,11 +26,10 @@ def test_create_and_verify_secure():
     y = init_secure()
     x.set()
     y.get()
-    assert y.password == test_password
+    assert y.password == password
 
 def test_create_and_modify_secure():
 
-    newpassword = 'newpassword'
     x = init_secure()
     y = init_secure()
     x.set()
@@ -56,11 +49,9 @@ def test_delete_secure():
     y.get()
     assert y.password is None
 
-# def test_credentials_unsecure_valid():
-#
-#     x = init_unsecure()
-#     x.alias = test_alias
-#     x.plain.location = dir_data
-#     x.get()
-#     assert x.user == test_user
-#     assert x.password == test_password
+def test_credentials_unsecure_valid():
+
+    x = init_unsecure()
+    x.get()
+    assert x.user == user
+    assert x.password == password

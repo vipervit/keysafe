@@ -1,11 +1,23 @@
 from setuptools import setup, find_packages
+from keysafe import __version__
+
+with open("README.md", "r") as f:
+    long_description = f.read()
 
 setup(
     name='keysafe',
-    author='Vitaly Vigasin (ViperVit)',
+    author='ViperVit (V.Vigasin)',
     author_email='vitolg1@gmail.com',
     license='Apache',
-    description='General use library.',
-    version='0.1.1',
-    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests", "test*"])
+    description='Keyring-based utilitiy for enchanced safekeeping of login informaiton.',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    version=__version__,
+    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests", "test*"]),
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "Intended Audience :: Developers",
+        "Topic :: Utilities",
+        "Topic :: Security"
+    ]
 )
