@@ -2,4 +2,6 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-from keysafe.src import safe as safe
+__version__ = '0.1.2'
+
+from keysafe.src.safe import safe as safe

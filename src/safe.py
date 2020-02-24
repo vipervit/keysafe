@@ -25,6 +25,8 @@ class safe():
 
     def __init__(self, type=None):
         self._unsecure.filename = self.DEFAULT_FNAME_PLAIN
+        self._unsecure.mustdelete = True
+        self._unsecure.mustsave = True
         self.type = type
         if type == None:
             self.type = self.CREDS_TYPE_SECURE
@@ -93,7 +95,22 @@ class safe():
             raise ValueError('Could not detemine credentials type.')
 
     def delete(self):
+        if self.type == self.CREDS_TYPE_SECURE:
+            self.__delete_secure__()
+        elif self.type == self.CREDS_TYPE_PLAIN:
+            self.__delete_plain__()
+        else:
+            raise ValueError('Could not detemine credentials type.')
+
+    def __delete_secure__(self):
         keyring.delete_password(self.service, self.alias)
+
+    def __delete_plain__(self):
+        self.plain.destroy()
+
+    def __set_plain__(self):
+        self.plain.contents = { self.alias: { self.KWD_UID: self.user, self.KWD_PWD: self.password } }
+        self.plain.save_to_file()
 
     def __get_plain__(self):
         self.plain.get_from_file()
@@ -101,16 +118,13 @@ class safe():
         self.user = t[self.KWD_UID]
         self.password = t[self.KWD_PWD]
 
+    def __set_secure__(self):
+        assert self.user is not None and self.password is not None
+        actual = self._sepid + self.user + self._seppwd + self.password
+        keyring.set_password(self.service, self.alias, actual)
+
     def __get_secure__(self):
         actual = keyring.get_password(self.service, self.alias)
         if actual is not None:
             self.user = (actual.split(self._sepid)[1]).split(self._seppwd)[0]
             self.password = actual.split(self._seppwd)[1]
-
-    def __set_plain__(self):
-        raise NotImplementedError
-
-    def __set_secure__(self):
-        assert self.user is not None and self.password is not None
-        actual = self._sepid + self.user + self._seppwd + self.password
-        keyring.set_password(self.service, self.alias, actual)

@@ -10,28 +10,30 @@ def init_secure():
     x.service = service
     x.alias = alias
     x.user = user
-    x.password = password
     return x
 
-def init_unsecure():
+def init_plain():
 
-    y = safe(safe.CREDS_TYPE_PLAIN)
-    y.alias =  alias
-    y.plain.location = dir_data
-    return y
+    x = safe(safe.CREDS_TYPE_PLAIN)
+    x.plain.location = dir_data
+    x.alias =  alias
+    x.user = user
+    return x
 
-def test_create_and_verify_secure():
+def test_set_secure():
 
     x = init_secure()
     y = init_secure()
+    x.password = password
     x.set()
     y.get()
     assert y.password == password
 
-def test_create_and_modify_secure():
+def test_set_modify_secure():
 
     x = init_secure()
     y = init_secure()
+    x.password = password
     x.set()
     x.password = newpassword
     x.set()
@@ -42,6 +44,7 @@ def test_create_and_modify_secure():
 def test_delete_secure():
 
     x = init_secure()
+    x.password = password
     x.set()
     y = init_secure()
     y.password = None
@@ -49,9 +52,37 @@ def test_delete_secure():
     y.get()
     assert y.password is None
 
-def test_credentials_unsecure_valid():
+def test_plain_set():
 
-    x = init_unsecure()
-    x.get()
-    assert x.user == user
-    assert x.password == password
+    x = init_plain()
+    y = init_plain()
+    x.password = password
+    x.set()
+    y.get()
+    assert y.password == password
+
+def test_set_modify_plain():
+
+    x = init_plain()
+    y = init_plain()
+    x.password = password
+    x.set()
+    assert x.plain.file_exists()
+    y.get()
+    assert y.password == password
+
+def test_set_modify_plain():
+
+    x = init_plain()
+    y = init_plain()
+    x.password = password
+    x.set()
+    x.password = newpassword
+    x.set()
+    y.get()
+    assert y.password == newpassword
+
+def test_delete_plain():
+    x = init_plain()
+    x.delete()
+    assert not x.plain.file_exists()
