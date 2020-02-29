@@ -1,8 +1,7 @@
 import pytest
 
-import keysafe
+from keysafe import safe
 from keysafe.tests import *
-from keysafe.src.safe import safe
 
 def init_secure():
 
