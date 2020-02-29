@@ -4,12 +4,6 @@ pipeline {
 
     stages {
 
-      stage('INSTALL DEPENDENCIES') {
-       steps {
-       sh 'pip install --upgrade jsondata'
-       }
-     }
-
       stage('TEST') {
         steps {
           sh 'pytest'
@@ -25,7 +19,7 @@ pipeline {
 
       stage('UPLOAD') {
         steps {
-          sh 'python3 -m twine upload dist/* -u keysafe'
+          sh 'python3 -m twine upload dist/* -u vipervit'
         }
        }
 
@@ -36,13 +30,6 @@ pipeline {
        }
 
       }
-
-/*      stage('DOCKER: Push image') {
-        steps('push image') {
-          sh 'docker push vipervit/keysafe:latest'
-        }
-      }
-*/
 
     }
 }
