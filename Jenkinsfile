@@ -4,12 +4,6 @@ pipeline {
 
     stages {
 
-      stage('TEST') {
-        steps {
-          sh 'pytest'
-        }
-      }
-
       stage('BUILD') {
         steps {
           sh 'rm -r -f dist'
