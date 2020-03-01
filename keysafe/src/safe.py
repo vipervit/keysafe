@@ -2,26 +2,26 @@ import logging
 
 import keyring
 
-from viperlib import jsondata
+from jsonnote import jsonnote
 
 logger = logging.getLogger(__name__)
 
-class safe():
+class safe:
 
     _srctype = None
     _service = None
     _alias = None
     _user = None
     _pwd = None
-    _unsecure = jsondata()
+    _unsecure = jsonnote()
     _sepid = '_id_:'
     _seppwd = '_pwd_:'
 
-    CREDS_TYPE_PLAIN = 'json' # used for storing credentials as plain text in JSON format
+    CREDS_TYPE_PLAIN = 'plain' # used for storing credentials as plain text in JSON format
     CREDS_TYPE_SECURE = 'keyring' # used for storing credentials securely using keyring package
     KWD_UID = 'uid'
     KWD_PWD = 'pwd'
-    DEFAULT_FNAME_PLAIN = 'credentials'
+    DEFAULT_FNAME_PLAIN = 'creds'
 
     def __init__(self, type=None):
         self._unsecure.filename = self.DEFAULT_FNAME_PLAIN
@@ -42,10 +42,14 @@ class safe():
 
     @property
     def service(self):
+        if self.type != self.CREDS_TYPE_SECURE:
+            raise AttributeError('Wrong value for credentials type: ' + self.type)
         return self._service
 
     @service.setter
     def service(self, val):
+        if self.type != self.CREDS_TYPE_SECURE:
+            raise AttributeError('Wrong value for credentials type: ' + self.type)
         self._service = val
 
     @property
