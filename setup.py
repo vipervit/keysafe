@@ -14,6 +14,7 @@ setup(
     long_description_content_type="text/markdown",
     version=__version__,
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests", "test*"]),
+    url='https://github.com/vipervit/keysafe',
     classifiers=[
         "Programming Language :: Python :: 3",
         "Intended Audience :: Developers",
